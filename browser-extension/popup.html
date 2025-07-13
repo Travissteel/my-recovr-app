@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RecovR Content Blocker</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      width: 350px;
+      min-height: 400px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    
+    .header {
+      padding: 1rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+    }
+    
+    .tagline {
+      font-size: 0.875rem;
+      opacity: 0.9;
+    }
+    
+    .status-card {
+      margin: 1rem;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      color: #1f2937;
+    }
+    
+    .status-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+    
+    .status-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #10b981;
+    }
+    
+    .status-indicator.inactive {
+      background: #ef4444;
+    }
+    
+    .status-text {
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    
+    .stat-item {
+      text-align: center;
+      padding: 0.75rem;
+      background: #f8fafc;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+    
+    .stat-number {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #3b82f6;
+      margin-bottom: 0.25rem;
+    }
+    
+    .stat-label {
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+    
+    .auth-section {
+      padding: 1rem;
+      text-align: center;
+    }
+    
+    .auth-message {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+    }
+    
+    .btn {
+      width: 100%;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 0.5rem;
+    }
+    
+    .btn-primary {
+      background: #3b82f6;
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: #2563eb;
+    }
+    
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    
+    .btn-danger {
+      background: #ef4444;
+      color: white;
+    }
+    
+    .btn-danger:hover {
+      background: #dc2626;
+    }
+    
+    .actions {
+      margin: 1rem;
+    }
+    
+    .action-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0.75rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      color: white;
+      text-decoration: none;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .action-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .action-text {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    
+    .action-icon {
+      font-size: 1rem;
+    }
+    
+    .footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.75rem;
+      opacity: 0.8;
+    }
+    
+    .hidden {
+      display: none;
+    }
+    
+    .loading {
+      text-align: center;
+      padding: 2rem;
+    }
+    
+    .spinner {
+      width: 24px;
+      height: 24px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top: 2px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .emergency-help {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #dc2626;
+      padding: 0.75rem;
+      border-radius: 8px;
+      margin: 1rem;
+      font-size: 0.875rem;
+      text-align: center;
+    }
+    
+    .emergency-help strong {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">RecovR</div>
+    <div class="tagline">Content Blocker</div>
+  </div>
+  
+  <!-- Loading State -->
+  <div id="loading-state" class="loading">
+    <div class="spinner"></div>
+    <div>Loading...</div>
+  </div>
+  
+  <!-- Authentication Required -->
+  <div id="auth-required" class="hidden">
+    <div class="auth-section">
+      <div class="auth-message">
+        Sign in to your RecovR account to enable content blocking protection.
+      </div>
+      <button id="sign-in-btn" class="btn btn-primary">Sign In to RecovR</button>
+      <button id="create-account-btn" class="btn btn-secondary">Create Account</button>
+    </div>
+  </div>
+  
+  <!-- Main Interface -->
+  <div id="main-interface" class="hidden">
+    <div class="status-card">
+      <div class="status-header">
+        <div class="status-text">Protection Status</div>
+        <div id="status-indicator" class="status-indicator"></div>
+      </div>
+      
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div id="blocked-count" class="stat-number">0</div>
+          <div class="stat-label">Sites Blocked</div>
+        </div>
+        <div class="stat-item">
+          <div id="sessions-count" class="stat-number">0</div>
+          <div class="stat-label">Active Sessions</div>
+        </div>
+      </div>
+      
+      <div style="font-size: 0.75rem; color: #6b7280; text-align: center;">
+        Last sync: <span id="last-sync">Never</span>
+      </div>
+    </div>
+    
+    <div class="actions">
+      <button id="sync-now-btn" class="action-btn">
+        <span class="action-text">Sync Now</span>
+        <span class="action-icon">🔄</span>
+      </button>
+      
+      <button id="manage-blocks-btn" class="action-btn">
+        <span class="action-text">Manage Blocked Content</span>
+        <span class="action-icon">⚙️</span>
+      </button>
+      
+      <button id="view-stats-btn" class="action-btn">
+        <span class="action-text">View Blocking Stats</span>
+        <span class="action-icon">📊</span>
+      </button>
+      
+      <button id="emergency-btn" class="action-btn" style="border-color: #ef4444; color: #fecaca;">
+        <span class="action-text">Need Help? Crisis Support</span>
+        <span class="action-icon">🆘</span>
+      </button>
+    </div>
+    
+    <div class="actions">
+      <button id="sign-out-btn" class="btn btn-danger">Sign Out</button>
+    </div>
+  </div>
+  
+  <!-- Emergency Help -->
+  <div id="emergency-help" class="hidden">
+    <div class="emergency-help">
+      <strong>Need immediate help?</strong>
+      If you're having thoughts of self-harm or substance use, please reach out:
+      <br><br>
+      <strong>Crisis Text Line:</strong> Text HOME to 741741
+      <br>
+      <strong>SAMHSA Helpline:</strong> 1-800-662-4357
+    </div>
+    <div class="actions">
+      <button id="back-to-main-btn" class="btn btn-secondary">Back to Main</button>
+    </div>
+  </div>
+  
+  <div class="footer">
+    Stay strong on your recovery journey 💪
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecovR Enhanced Components Preview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Enhanced animations */
+        @keyframes treeGrow {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes pulse-gentle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @keyframes bounce-gentle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+        
+        .tree-animate { animation: treeGrow 1s ease-in-out; }
+        .breathe { animation: breathe 2s ease-in-out infinite; }
+        .pulse-gentle { animation: pulse-gentle 2s ease-in-out infinite; }
+        .bounce-gentle { animation: bounce-gentle 1s ease-in-out infinite; }
+        
+        /* Custom gradients */
+        .gradient-emerald { background: linear-gradient(135deg, #10b981, #059669); }
+        .gradient-blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        .gradient-purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+        .gradient-orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .gradient-pink { background: linear-gradient(135deg, #ec4899, #db2777); }
+        .gradient-teal { background: linear-gradient(135deg, #14b8a6, #0d9488); }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-5xl font-bold text-gray-900 mb-4">
+                🌟 RecovR Enhanced Components
+            </h1>
+            <p class="text-xl text-gray-600 mb-2">
+                Production-ready features that compete with Quittr
+            </p>
+            <p class="text-sm text-gray-500">
+                Life Tree • Multi-Addiction Tracking • Daily Tasks • Crisis Support
+            </p>
+        </div>
+
+        <!-- Life Tree Showcase -->
+        <div class="mb-16">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6 flex items-center gap-3">
+                <span class="text-4xl">🌳</span> 
+                Enhanced Life Tree Visualization
+                <span class="text-sm bg-green-100 text-green-700 px-3 py-1 rounded-full">FIXED!</span>
+            </h2>
+            <p class="text-gray-600 mb-8 text-lg">
+                Dynamic SVG tree that grows with recovery progress. <strong>Much better than the broken floating circles!</strong>
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Seedling Stage -->
+                <div class="bg-gradient-to-br from-emerald-50 via-green-50 to-lime-50 border-emerald-200 shadow-lg rounded-xl border p-6 tree-animate">
+                    <h3 class="text-center text-emerald-800 font-semibold mb-4 flex items-center justify-center gap-2">
+                        Your Life Tree <span class="text-2xl">🌳</span>
+                    </h3>
+                    <div class="relative mb-4">
+                        <svg width="100%" height="200" viewBox="0 0 400 200" class="mx-auto">
+                            <!-- Sky background -->
+                            <defs>
+                                <linearGradient id="sky1" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" stop-color="#e0f2fe" />
+                                    <stop offset="100%" stop-color="#f0f9ff" />
+                                </linearGradient>
+                            </defs>
+                            <rect width="400" height="200" fill="url(#sky1)" />
+                            
+                            <!-- Ground -->
+                            <ellipse cx="200" cy="180" rx="80" ry="10" fill="#22c55e" opacity="0.4" />
+                            
+                            <!-- Small trunk -->
+                            <rect x="195" y="160" width="10" height="20" fill="#92400e" rx="1" />
+                            
+                            <!-- Small leaves -->
+                            <circle cx="200" cy="150" r="15" fill="#22c55e" opacity="0.9" class="pulse-gentle" />
+                            
+                            <!-- Progress indicator -->
+                            <text x="200" y="30" text-anchor="middle" class="text-xs font-bold fill-emerald-700">Day 3 of 90</text>
+                        </svg>
+                    </div>
+                    <div class="w-full bg-emerald-100 rounded-full h-3 mb-4">
+                        <div class="gradient-emerald h-full rounded-full transition-all duration-1000" style="width: 3%"></div>
+                    </div>
+                    <p class="text-center text-emerald-700 font-semibold mb-3">Your journey begins! 🌱</p>
+                    <div class="grid grid-cols-3 gap-4 text-center text-sm">
+                        <div class="bg-white/60 rounded-lg p-2">
+                            <div class="font-bold text-emerald-800">3</div>
+                            <div class="text-emerald-600 text-xs">Days Strong</div>
+                        </div>
+                        <div class="bg-white/60 rounded-lg p-2">
+                            <div class="font-bold text-emerald-800">1</div>
+                            <div class="text-emerald-600 text-xs">Programs</div>
+                        </div>
+                        <div class="bg-white/60 rounded-lg p-2">
+                            <div class="font-bold text-emerald-800">0</div>
+                            <div class="text-emerald-600 text-xs">Milestones</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Growing Stage -->
+                <div class="bg-gradient-to-br from-emerald-50 via-green-50 to-lime-50 border-emerald-200 shadow-lg rounded-xl border p-6 tree-animate">
+                    <h3 class="text-center text-emerald-800 font-semibold mb-4 flex items-center justify-center gap-2">
+                        Your Life Tree <span class="text-2xl">🌳</span>
+                    </h3>
+                    <div class="relative mb-4">
+                        <svg width="100%" height="200" viewBox="0 0 400 200" class="mx-auto">
+                            <rect width="400" height="200" fill="url(#sky1)" />
+                            <ellipse cx="200" cy="180" rx="100" ry="12" fill="#22c55e" opacity="0.5" />
+                            
+                            <!-- Stronger trunk -->
+                            <rect x="192" y="140" width="16" height="40" fill="#a16207" rx="2" />
+                            
+                            <!-- Branches -->
+                            <path d="M 200 150 Q 220 140 240 130" stroke="#a16207" stroke-width="3" fill="none" />
+                            <path d="M 200 150 Q 180 140 160 130" stroke="#a16207" stroke-width="3" fill="none" />
+                            
+                            <!-- Main foliage -->
+                            <circle cx="200" cy="130" r="25" fill="#16a34a" opacity="0.9" class="breathe" />
+                            
+                            <!-- Side foliage -->
+                            <ellipse cx="170" cy="125" rx="12" ry="8" fill="#22c55e" opacity="0.8" class="pulse-gentle" />
+                            <ellipse cx="230" cy="125" rx="12" ry="8" fill="#22c55e" opacity="0.8" class="pulse-gentle" />
+                            
+                            <!-- Flowers -->
+                            <circle cx="210" cy="120" r="2" fill="#fbbf24" class="bounce-gentle" />
+                            
+                            <text x="200" y="25" text-anchor="middle" class="text-xs font-bold fill-emerald-700">Day 25 of 90</text>
+                        </svg>
+                    </div>
+                    <div class="w-full bg-emerald-100 rounded-full h-3 mb-4">
+                        <div class="gradient-emerald h-full rounded-full transition-all duration-1000" style="width: 28%"></div>
+                    </div>
+                    <p class="text-center text-emerald-700 font-semibold mb-3">Growing stronger every day! 🌿</p>
+                    <div class="grid grid-cols-3 gap-4 text-center text-sm">
+                        <div class="bg-white/60 rounded-lg p-2">
+                            <div class="font-bold text-emerald-800">25</div>
+                            <div class="text-emerald-600 text-xs">Days Strong</div>
+                        </div>
+                        <div class="bg-white/60 rounded-lg p-2">
+                            <div class="font-bold text-emerald-800">2</div>
+                            <div class="text-emerald-600 text-xs">Programs</div>
+                        </div>
+                        <div class="bg-white/60 rounded-lg p-2">
+                            <div class="font-bold text-emerald-800">3</div>
+                            <div class="text-emerald-600 text-xs">Milestones</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flourishing Stage -->
+                <div class="bg-gradient-to-br from-emerald-50 via-green-50 to-lime-50 border-emerald-200 shadow-lg rounded-xl border p-6 tree-animate">
+                    <h3 class="text-center text-emerald-800 font-semibold mb-4 flex items-center justify-center gap-2">
+                        Your Life Tree <span class="text-2xl">🌳</span>
+                    </h3>
+                    <div class="relative mb-4">
+                        <svg width="100%" height="200" viewBox="0 0 400 200" class="mx-auto">
+                            <rect width="400" height="200" fill="url(#sky1)" />
+                            <ellipse cx="200" cy="180" rx="120" ry="15" fill="#16a34a" opacity="0.6" />
+                            
+                            <!-- Strong trunk -->
+                            <rect x="190" y="120" width="20" height="60" fill="#92400e" rx="3" />
+                            
+                            <!-- Multiple branches -->
+                            <path d="M 200 140 Q 240 120 270 110" stroke="#92400e" stroke-width="4" fill="none" />
+                            <path d="M 200 140 Q 160 120 130 110" stroke="#92400e" stroke-width="4" fill="none" />
+                            <path d="M 200 135 Q 220 125 240 115" stroke="#92400e" stroke-width="3" fill="none" />
+                            <path d="M 200 135 Q 180 125 160 115" stroke="#92400e" stroke-width="3" fill="none" />
+                            
+                            <!-- Abundant foliage -->
+                            <circle cx="200" cy="110" r="35" fill="#15803d" opacity="0.9" class="breathe" />
+                            <ellipse cx="160" cy="105" rx="18" ry="12" fill="#16a34a" opacity="0.8" class="pulse-gentle" />
+                            <ellipse cx="240" cy="105" rx="18" ry="12" fill="#16a34a" opacity="0.8" class="pulse-gentle" />
+                            <ellipse cx="200" cy="85" rx="15" ry="10" fill="#22c55e" opacity="0.7" class="pulse-gentle" />
+                            
+                            <!-- Flowers and fruits -->
+                            <circle cx="180" cy="95" r="3" fill="#f59e0b" class="bounce-gentle" />
+                            <circle cx="220" cy="100" r="3" fill="#f59e0b" class="bounce-gentle" />
+                            <circle cx="200" cy="90" r="3" fill="#f59e0b" class="bounce-gentle" />
+                            
+                            <!-- Butterflies -->
+                            <text x="150" y="70" class="text-sm bounce-gentle">🦋</text>
+                            <text x="260" y="80" class="text-xs bounce-gentle">🐦</text>
+                            
+                            <text x="200" y="25" text-anchor="middle" class="text-xs font-bold fill-emerald-700">Day 68 of 90</text>
+                        </svg>
+                    </div>
+                    <div class="w-full bg-emerald-100 rounded-full h-3 mb-4">
+                        <div class="gradient-emerald h-full rounded-full transition-all duration-1000" style="width: 76%"></div>
+                    </div>
+                    <p class="text-center text-emerald-700 font-semibold mb-3">A magnificent tree of recovery! 🌺</p>
+                    <div class="grid grid-cols-3 gap-4 text-center text-sm">
+                        <div class="bg-white/60 rounded-lg p-2">
+                            <div class="font-bold text-emerald-800">68</div>
+                            <div class="text-emerald-600 text-xs">Days Strong</div>
+                        </div>
+                        <div class="bg-white/60 rounded-lg p-2">
+                            <div class="font-bold text-emerald-800">2</div>
+                            <div class="text-emerald-600 text-xs">Programs</div>
+                        </div>
+                        <div class="bg-white/60 rounded-lg p-2">
+                            <div class="font-bold text-emerald-800">9</div>
+                            <div class="text-emerald-600 text-xs">Milestones</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Streak Counter Showcase -->
+        <div class="mb-16">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6 flex items-center gap-3">
+                <span class="text-4xl">🔥</span> Multi-Addiction Streak Counter
+            </h2>
+            <p class="text-gray-600 mb-8 text-lg">
+                Beautiful progress cards with milestone achievements and motivational messaging.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Pornography Recovery -->
+                <div class="bg-gradient-to-br from-emerald-50 to-green-50 border-emerald-200 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 rounded-xl border">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center">
+                                <span class="text-2xl">🚫</span>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-2xl font-bold text-emerald-600">15</div>
+                                <div class="text-xs text-gray-600">days</div>
+                            </div>
+                        </div>
+                        <h3 class="font-semibold text-emerald-700 mb-1">Pornography Recovery</h3>
+                        <p class="text-sm text-gray-600 mb-4">Building momentum! Keep going! 💪</p>
+                        
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-600">Progress</span>
+                                <span class="font-semibold text-emerald-700">17%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                                <div class="gradient-emerald h-full rounded-full transition-all duration-1000" style="width: 17%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4 text-center text-sm mb-4">
+                            <div class="bg-white/60 rounded-lg p-3">
+                                <div class="font-bold text-emerald-600 text-lg">32</div>
+                                <div class="text-gray-600 text-xs">Best Streak</div>
+                            </div>
+                            <div class="bg-white/60 rounded-lg p-3">
+                                <div class="font-bold text-emerald-600 text-lg">75</div>
+                                <div class="text-gray-600 text-xs">Days Left</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-center gap-1">
+                            <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold gradient-emerald text-white shadow-md">🌱</div>
+                            <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold bg-gray-200 text-gray-400">🌿</div>
+                            <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold bg-gray-200 text-gray-400">🌳</div>
+                            <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold bg-gray-200 text-gray-400">🏆</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Media Recovery -->
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 rounded-xl border">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                <span class="text-2xl">📱</span>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-2xl font-bold text-blue-600">7</div>
+                                <div class="text-xs text-gray-600">days</div>
+                            </div>
+                        </div>
+                        <h3 class="font-semibold text-blue-700 mb-1">Social Media Recovery</h3>
+                        <p class="text-sm text-gray-600 mb-4">Your journey begins! 🌱</p>
+                        
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-600">Progress</span>
+                                <span class="font-semibold text-blue-700">8%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                                <div class="gradient-blue h-full rounded-full transition-all duration-1000" style="width: 8%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4 text-center text-sm mb-4">
+                            <div class="bg-white/60 rounded-lg p-3">
+                                <div class="font-bold text-blue-600 text-lg">21</div>
+                                <div class="text-gray-600 text-xs">Best Streak</div>
+                            </div>
+                            <div class="bg-white/60 rounded-lg p-3">
+                                <div class="font-bold text-blue-600 text-lg">83</div>
+                                <div class="text-gray-600 text-xs">Days Left</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-center gap-1">
+                            <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold gradient-blue text-white shadow-md">🌱</div>
+                            <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold bg-gray-200 text-gray-400">🌿</div>
+                            <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold bg-gray-200 text-gray-400">🌳</div>
+                            <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold bg-gray-200 text-gray-400">🏆</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add New Program Card -->
+                <div class="bg-gradient-to-br from-gray-50 to-slate-50 border-dashed border-2 border-gray-300 hover:border-emerald-400 transition-all duration-300 hover:shadow-lg rounded-xl">
+                    <div class="p-8 text-center h-full flex flex-col justify-center">
+                        <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 hover:bg-emerald-100 transition-colors">
+                            <span class="text-3xl">➕</span>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Add Another Program</h3>
+                        <p class="text-sm text-gray-600 mb-4">Track multiple addictions simultaneously</p>
+                        <button class="border-emerald-300 text-emerald-600 hover:bg-emerald-50 hover:border-emerald-400 transition-all duration-200 inline-flex items-center justify-center rounded-md text-sm font-medium border px-4 py-2">
+                            ➕ Start New Journey
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Daily Tasks Showcase -->
+        <div class="mb-16">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6 flex items-center gap-3">
+                <span class="text-4xl">✅</span> Gamified Daily Tasks System
+            </h2>
+            <p class="text-gray-600 mb-8 text-lg">
+                XP-based wellness tasks with categorized activities to boost daily engagement.
+            </p>
+            
+            <div class="bg-gradient-to-br from-slate-50 to-gray-50 border-gray-200 rounded-xl border shadow-lg">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="flex items-center gap-2 text-gray-800 text-xl font-semibold">
+                            <span class="text-2xl">✅</span>
+                            Daily Wellness Tasks
+                        </h3>
+                        <div class="text-right">
+                            <div class="text-sm text-gray-600">Daily XP</div>
+                            <div class="font-bold text-lg text-purple-600">65 / 95</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between text-sm mb-2">
+                            <span class="text-gray-600">4 of 6 completed</span>
+                            <span class="font-medium text-purple-600">67%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                            <div class="bg-gradient-to-r from-purple-400 to-purple-600 h-full rounded-full transition-all duration-500" style="width: 67%"></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <!-- Completed Task -->
+                        <div class="p-4 rounded-lg border bg-green-50 border-green-200 opacity-80">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3 flex-1">
+                                    <div class="w-10 h-10 rounded-full flex items-center justify-center bg-green-100">
+                                        <span class="text-xl">✅</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <h4 class="font-semibold text-green-700 line-through">Morning Mindfulness</h4>
+                                            <span class="px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-600">Easy</span>
+                                        </div>
+                                        <p class="text-sm text-green-600">Start your day with 5 minutes of deep breathing</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="text-right">
+                                        <div class="font-bold text-green-600">+10 XP</div>
+                                    </div>
+                                    <div class="text-green-600 font-semibold text-sm">Done! 🎉</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Active Task -->
+                        <div class="p-4 rounded-lg border bg-gradient-to-r from-blue-50 to-cyan-50 border-blue-200 hover:shadow-md">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3 flex-1">
+                                    <div class="w-10 h-10 rounded-full flex items-center justify-center bg-blue-100">
+                                        <span class="text-xl">💬</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <h4 class="font-semibold text-blue-700">Connect with Someone</h4>
+                                            <span class="px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-600">Medium</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600">Reach out to a friend, family member, or support person</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="text-right">
+                                        <div class="font-bold text-purple-600">+20 XP</div>
+                                    </div>
+                                    <button class="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white text-sm px-4 py-2 rounded-md">
+                                        Complete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Another Active Task -->
+                        <div class="p-4 rounded-lg border bg-gradient-to-r from-pink-50 to-rose-50 border-pink-200 hover:shadow-md">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3 flex-1">
+                                    <div class="w-10 h-10 rounded-full flex items-center justify-center bg-pink-100">
+                                        <span class="text-xl">🎨</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <h4 class="font-semibold text-pink-700">Creative Expression</h4>
+                                            <span class="px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-600">Hard</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600">Spend 20 minutes on art, music, writing, or any creative activity</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="text-right">
+                                        <div class="font-bold text-purple-600">+25 XP</div>
+                                    </div>
+                                    <button class="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white text-sm px-4 py-2 rounded-md">
+                                        Complete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Total XP Display -->
+                    <div class="bg-white/60 rounded-lg p-3 text-center border border-gray-200 mt-6">
+                        <div class="text-sm text-gray-600 mb-1">Total XP</div>
+                        <div class="font-bold text-2xl text-purple-600">890</div>
+                        <div class="text-xs text-gray-500">Keep building your recovery!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Crisis Button Showcase -->
+        <div class="mb-16">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6 flex items-center gap-3">
+                <span class="text-4xl">🆘</span> Crisis Intervention System
+            </h2>
+            <p class="text-gray-600 mb-8 text-lg">
+                24/7 emergency support with breathing exercises and crisis resources.
+            </p>
+            
+            <div class="max-w-md mx-auto">
+                <div class="bg-gradient-to-br from-red-50 to-orange-50 border-red-200 shadow-lg rounded-xl border p-6 text-center">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl">🆘</span>
+                    </div>
+                    
+                    <h3 class="text-lg font-semibold text-red-700 mb-2">Need Immediate Help?</h3>
+                    <p class="text-red-600 text-sm mb-4">Crisis support is available 24/7. You're not alone.</p>
+                    
+                    <div class="space-y-3">
+                        <button class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 text-lg shadow-lg transform hover:scale-105 transition-all duration-200 rounded-lg">
+                            🚨 Get Help Now
+                        </button>
+                        
+                        <button class="w-full border-red-300 text-red-600 hover:bg-red-50 border px-4 py-2 rounded-lg">
+                            🫁 Breathing Exercise
+                        </button>
+                    </div>
+                    
+                    <p class="text-xs text-gray-500 mt-4">All conversations are confidential</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature Comparison -->
+        <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-200 mb-16">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-8 text-center">
+                🎯 RecovR vs Quittr Feature Comparison
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold text-emerald-700 mb-6 flex items-center gap-2">
+                        <span class="text-2xl">✅</span> RecovR Advantages
+                    </h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-center gap-3">
+                            <span class="text-emerald-500 text-lg">✓</span>
+                            <span>Multi-addiction support (vs single focus)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-emerald-500 text-lg">✓</span>
+                            <span>Better pricing ($24.99/year vs $19.99-$49.99)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-emerald-500 text-lg">✓</span>
+                            <span>Advanced Life Tree visualization</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-emerald-500 text-lg">✓</span>
+                            <span>Comprehensive daily task system</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-emerald-500 text-lg">✓</span>
+                            <span>Integrated crisis intervention</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-emerald-500 text-lg">✓</span>
+                            <span>Community support features</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-blue-700 mb-6 flex items-center gap-2">
+                        <span class="text-2xl">📈</span> Key Metrics
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="bg-blue-50 rounded-lg p-6 text-center">
+                            <div class="text-4xl font-bold text-blue-600 mb-2">90</div>
+                            <div class="text-blue-700 font-medium">Day Programs</div>
+                        </div>
+                        <div class="bg-purple-50 rounded-lg p-6 text-center">
+                            <div class="text-4xl font-bold text-purple-600 mb-2">10+</div>
+                            <div class="text-purple-700 font-medium">Addiction Types</div>
+                        </div>
+                        <div class="bg-emerald-50 rounded-lg p-6 text-center">
+                            <div class="text-4xl font-bold text-emerald-600 mb-2">24/7</div>
+                            <div class="text-emerald-700 font-medium">Crisis Support</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center py-8 border-t border-gray-200">
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">
+                🚀 RecovR - Enhanced & Ready for Market
+            </h3>
+            <p class="text-gray-600 mb-4">
+                More features, better support, affordable pricing
+            </p>
+            <div class="flex justify-center items-center gap-8 text-sm text-gray-500">
+                <span>✨ Production Ready</span>
+                <span>🎯 Competitive Features</span>
+                <span>💰 Better Value</span>
+                <span>🔒 Crisis Support</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
