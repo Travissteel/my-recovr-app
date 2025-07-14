@@ -81,4 +81,149 @@ const MilestonePost: React.FC<MilestonePostProps> = ({ groupId, onPostCreated })
   };
 
   const getMilestoneEmoji = (type: string, number: number) => {
-    if (type === 'personal_goal') return '🎯';\n    if (number === 1) return '🌱';\n    if (number <= 7) return '🌿';\n    if (number <= 30) return '🌳';\n    if (number <= 90) return '🏆';\n    if (number <= 365) return '💎';\n    return '👑';\n  };\n\n  if (!isOpen) {\n    return (\n      <Card className=\"p-4\">\n        <Button \n          onClick={() => setIsOpen(true)}\n          className=\"w-full h-16 bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold text-lg\"\n        >\n          🎉 Share a Milestone 🎉\n        </Button>\n      </Card>\n    );\n  }\n\n  return (\n    <Card className=\"p-6\">\n      <div className=\"flex justify-between items-center mb-4\">\n        <h3 className=\"text-lg font-semibold text-gray-900 dark:text-white\">\n          🎉 Share Your Milestone\n        </h3>\n        <Button variant=\"outline\" size=\"sm\" onClick={() => setIsOpen(false)}>\n          ✕\n        </Button>\n      </div>\n\n      <form onSubmit={handleSubmit} className=\"space-y-4\">\n        {/* Milestone Type Selection */}\n        <div className=\"grid grid-cols-2 gap-4\">\n          <div>\n            <label className=\"block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1\">\n              Milestone Type\n            </label>\n            <select\n              value={formData.milestoneType}\n              onChange={(e) => setFormData({ ...formData, milestoneType: e.target.value as any })}\n              className=\"w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white\"\n            >\n              {milestoneOptions.map((option) => (\n                <option key={option.value} value={option.value}>\n                  {option.label}\n                </option>\n              ))}\n            </select>\n          </div>\n\n          <div>\n            <label className=\"block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1\">\n              Number\n            </label>\n            <input\n              type=\"number\"\n              min=\"1\"\n              value={formData.milestoneNumber}\n              onChange={(e) => setFormData({ ...formData, milestoneNumber: parseInt(e.target.value) || 1 })}\n              className=\"w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white\"\n            />\n          </div>\n        </div>\n\n        {/* Milestone Preview */}\n        <div className=\"p-3 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-lg border\">\n          <div className=\"flex items-center space-x-2\">\n            <span className=\"text-2xl\">\n              {getMilestoneEmoji(formData.milestoneType, formData.milestoneNumber)}\n            </span>\n            <span className=\"font-semibold text-gray-900 dark:text-white\">\n              {formData.milestoneNumber} {milestoneOptions.find(opt => opt.value === formData.milestoneType)?.unit || ''}\n              {formData.milestoneType === 'personal_goal' ? ' Personal Goal' : ' Sober!'}\n            </span>\n          </div>\n        </div>\n\n        {/* Custom Title */}\n        <div>\n          <label className=\"block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1\">\n            Custom Title (Optional)\n          </label>\n          <input\n            type=\"text\"\n            value={formData.title}\n            onChange={(e) => setFormData({ ...formData, title: e.target.value })}\n            placeholder=\"Add a custom title for your milestone...\"\n            className=\"w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white\"\n          />\n        </div>\n\n        {/* Story Content */}\n        <div>\n          <label className=\"block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1\">\n            Share Your Story *\n          </label>\n          <textarea\n            value={formData.content}\n            onChange={(e) => setFormData({ ...formData, content: e.target.value })}\n            placeholder=\"Tell your story... What does this milestone mean to you? What challenges did you overcome? What advice would you give to others?\"\n            className=\"w-full p-3 border border-gray-300 rounded-md h-32 resize-none dark:bg-gray-700 dark:border-gray-600 dark:text-white\"\n            required\n          />\n        </div>\n\n        {/* Anonymous Option */}\n        <div className=\"flex items-center space-x-2\">\n          <input\n            type=\"checkbox\"\n            id=\"anonymous\"\n            checked={formData.isAnonymous}\n            onChange={(e) => setFormData({ ...formData, isAnonymous: e.target.checked })}\n            className=\"w-4 h-4 text-blue-600\"\n          />\n          <label htmlFor=\"anonymous\" className=\"text-sm text-gray-700 dark:text-gray-300\">\n            Share anonymously\n          </label>\n        </div>\n\n        {/* Action Buttons */}\n        <div className=\"flex space-x-3 pt-2\">\n          <Button \n            type=\"submit\" \n            disabled={loading || !formData.content.trim()}\n            className=\"flex-1 bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600\"\n          >\n            {loading ? 'Sharing...' : '🎉 Share Milestone'}\n          </Button>\n          <Button \n            type=\"button\" \n            variant=\"outline\" \n            onClick={() => setIsOpen(false)}\n            className=\"px-6\"\n          >\n            Cancel\n          </Button>\n        </div>\n      </form>\n    </Card>\n  );\n};\n\nexport default MilestonePost;"}
+    if (type === 'personal_goal') return '🎯';
+    if (number === 1) return '🌱';
+    if (number <= 7) return '🌿';
+    if (number <= 30) return '🌳';
+    if (number <= 90) return '🏆';
+    if (number <= 365) return '💎';
+    return '👑';
+  };
+
+  if (!isOpen) {
+    return (
+      <Card className="p-4">
+        <Button 
+          onClick={() => setIsOpen(true)}
+          className="w-full h-16 bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold text-lg"
+        >
+          🎉 Share a Milestone 🎉
+        </Button>
+      </Card>
+    );
+  }
+
+  return (
+    <Card className="p-6">
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+          🎉 Share Your Milestone
+        </h3>
+        <Button variant="outline" size="sm" onClick={() => setIsOpen(false)}>
+          ✕
+        </Button>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Milestone Type Selection */}
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Milestone Type
+            </label>
+            <select
+              value={formData.milestoneType}
+              onChange={(e) => setFormData({ ...formData, milestoneType: e.target.value as any })}
+              className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            >
+              {milestoneOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Number
+            </label>
+            <input
+              type="number"
+              min="1"
+              value={formData.milestoneNumber}
+              onChange={(e) => setFormData({ ...formData, milestoneNumber: parseInt(e.target.value) || 1 })}
+              className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            />
+          </div>
+        </div>
+
+        {/* Milestone Preview */}
+        <div className="p-3 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-lg border">
+          <div className="flex items-center space-x-2">
+            <span className="text-2xl">
+              {getMilestoneEmoji(formData.milestoneType, formData.milestoneNumber)}
+            </span>
+            <span className="font-semibold text-gray-900 dark:text-white">
+              {formData.milestoneNumber} {milestoneOptions.find(opt => opt.value === formData.milestoneType)?.unit || ''}
+              {formData.milestoneType === 'personal_goal' ? ' Personal Goal' : ' Sober!'}
+            </span>
+          </div>
+        </div>
+
+        {/* Custom Title */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            Custom Title (Optional)
+          </label>
+          <input
+            type="text"
+            value={formData.title}
+            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+            placeholder="Add a custom title for your milestone..."
+            className="w-full p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+          />
+        </div>
+
+        {/* Story Content */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            Share Your Story *
+          </label>
+          <textarea
+            value={formData.content}
+            onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+            placeholder="Tell your story... What does this milestone mean to you? What challenges did you overcome? What advice would you give to others?"
+            className="w-full p-3 border border-gray-300 rounded-md h-32 resize-none dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            required
+          />
+        </div>
+
+        {/* Anonymous Option */}
+        <div className="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            id="anonymous"
+            checked={formData.isAnonymous}
+            onChange={(e) => setFormData({ ...formData, isAnonymous: e.target.checked })}
+            className="w-4 h-4 text-blue-600"
+          />
+          <label htmlFor="anonymous" className="text-sm text-gray-700 dark:text-gray-300">
+            Share anonymously
+          </label>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex space-x-3 pt-2">
+          <Button 
+            type="submit" 
+            disabled={loading || !formData.content.trim()}
+            className="flex-1 bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600"
+          >
+            {loading ? 'Sharing...' : '🎉 Share Milestone'}
+          </Button>
+          <Button 
+            type="button" 
+            variant="outline" 
+            onClick={() => setIsOpen(false)}
+            className="px-6"
+          >
+            Cancel
+          </Button>
+        </div>
+      </form>
+    </Card>
+  );
+};
+
+export default MilestonePost;

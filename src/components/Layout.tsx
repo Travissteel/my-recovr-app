@@ -1,8 +1,12 @@
 import React from 'react';
-import { Outlet, Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
-const Layout: React.FC = () => {
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { user, logout } = useAuth();
   const location = useLocation();
 
@@ -71,7 +75,7 @@ const Layout: React.FC = () => {
 
         {/* Main Content */}
         <main className="flex-1 p-8">
-          <Outlet />
+          {children}
         </main>
       </div>
     </div>
