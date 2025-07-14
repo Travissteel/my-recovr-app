@@ -1,0 +1,74 @@
+{
+  "name": "RecovR - Recovery Platform",
+  "short_name": "RecovR",
+  "description": "Multi-addiction recovery platform with community support and crisis intervention",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#0ea5e9",
+  "background_color": "#ffffff",
+  "categories": ["health", "medical", "lifestyle"],
+  "lang": "en",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/pwa-64x64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-mobile.png",
+      "sizes": "375x812",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Mobile Dashboard"
+    },
+    {
+      "src": "/screenshot-desktop.png", 
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Desktop Dashboard"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Daily Check-in",
+      "short_name": "Check-in",
+      "description": "Quick daily mood and progress check-in",
+      "url": "/checkin",
+      "icons": [
+        {
+          "src": "/checkin-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Crisis Support",
+      "short_name": "Crisis",
+      "description": "Emergency crisis intervention support",
+      "url": "/crisis",
+      "icons": [
+        {
+          "src": "/crisis-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "prefer_related_applications": false
+}

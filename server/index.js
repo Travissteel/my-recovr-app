@@ -45,6 +45,7 @@ const dashboardRoutes = require('./routes/dashboard');
 const calendarRoutes = require('./routes/calendar');
 const financialRoutes = require('./routes/financial');
 const notificationSystemRoutes = require('./routes/notificationSystem');
+const chatbotRoutes = require('./routes/chatbot');
 
 const { authenticateSocket } = require('./middleware/auth');
 
@@ -146,6 +147,7 @@ app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/calendar', calendarRoutes);
 app.use('/api/financial', financialRoutes);
 app.use('/api/notification-system', notificationSystemRoutes);
+app.use('/api/chatbot', chatbotRoutes);
 
 // Socket.io for real-time features
 io.use(authenticateSocket);

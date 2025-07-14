@@ -26,6 +26,7 @@ import { ProfilePage } from './pages/ProfilePage'
 import { SettingsPage } from './pages/SettingsPage'
 import { PremiumPage } from './pages/PremiumPage'
 import { NotFoundPage } from './pages/NotFoundPage'
+import ChatbotPage from './pages/ChatbotPage'
 
 function App() {
   return (
@@ -124,6 +125,12 @@ function App() {
                 <Route path="/settings" element={
                   <ProtectedRoute>
                     <SettingsPage />
+                  </ProtectedRoute>
+                } />
+                
+                <Route path="/ai-companion" element={
+                  <ProtectedRoute>
+                    <ChatbotPage />
                   </ProtectedRoute>
                 } />
                 

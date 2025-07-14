@@ -341,10 +341,10 @@ const InteractiveCalendar: React.FC = () => {
 
                 {/* Event indicators */}
                 <div className="flex justify-center space-x-1">
-                  {day.dayData?.achievements.length > 0 && (
+                  {day.dayData?.achievements && day.dayData.achievements.length > 0 && (
                     <div className="w-2 h-2 bg-yellow-400 rounded-full" title="Achievement" />
                   )}
-                  {day.dayData?.triggers.length > 0 && (
+                  {day.dayData?.triggers && day.dayData.triggers.length > 0 && (
                     <div className="w-2 h-2 bg-red-400 rounded-full" title="Trigger" />
                   )}
                   {day.dayData?.challenges.some(c => c.status === 'completed') && (

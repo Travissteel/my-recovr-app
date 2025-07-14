@@ -99,6 +99,13 @@ export const Navbar: React.FC = () => {
             <NavLink to="/programs">Programs</NavLink>
             <NavLink to="/community">Community</NavLink>
             <NavLink to="/progress">Progress</NavLink>
+            <NavLink to="/ai-companion">
+              <span className="flex items-center space-x-1">
+                <span>🤖</span>
+                <span>AI Companion</span>
+                <span className="text-xs bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 px-1.5 py-0.5 rounded-full">Soon</span>
+              </span>
+            </NavLink>
             <NavLink to="/crisis">Crisis Support</NavLink>
             
             <div className="flex items-center space-x-2 ml-4">
@@ -150,6 +157,13 @@ export const Navbar: React.FC = () => {
               <NavLink to="/programs" mobile>Programs</NavLink>
               <NavLink to="/community" mobile>Community</NavLink>
               <NavLink to="/progress" mobile>Progress</NavLink>
+              <NavLink to="/ai-companion" mobile>
+                <span className="flex items-center space-x-1">
+                  <span>🤖</span>
+                  <span>AI Companion</span>
+                  <span className="text-xs bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 px-1.5 py-0.5 rounded-full">Soon</span>
+                </span>
+              </NavLink>
               <NavLink to="/crisis" mobile>Crisis Support</NavLink>
               <NavLink to="/profile" mobile>Profile</NavLink>
               <button

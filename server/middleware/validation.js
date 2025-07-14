@@ -93,11 +93,67 @@ const validateContentType = (req, res, next) => {
   next();
 };
 
+// Chatbot input validation
+const validateChatInput = (req, res, next) => {
+  const { message, conversationId } = req.body;
+
+  // Validate message
+  if (!message || typeof message !== 'string') {
+    return res.status(400).json({
+      error: 'Message is required and must be a string'
+    });
+  }
+
+  const trimmedMessage = message.trim();
+  if (trimmedMessage.length === 0) {
+    return res.status(400).json({
+      error: 'Message cannot be empty'
+    });
+  }
+
+  if (trimmedMessage.length > 1000) {
+    return res.status(400).json({
+      error: 'Message must be less than 1000 characters'
+    });
+  }
+
+  // Basic content filtering
+  const inappropriatePatterns = [
+    /\b(spam|scam|advertisement)\b/i,
+    /\b(sell|buy|promotion)\b/i,
+    /http[s]?:\/\/(?!recovr\.com)/i // Block external links except our domain
+  ];
+  
+  for (const pattern of inappropriatePatterns) {
+    if (pattern.test(trimmedMessage)) {
+      return res.status(400).json({
+        error: 'Message contains inappropriate content'
+      });
+    }
+  }
+
+  // Validate conversation ID if provided
+  if (conversationId && typeof conversationId !== 'string') {
+    return res.status(400).json({
+      error: 'Conversation ID must be a string'
+    });
+  }
+
+  // Sanitize the message
+  req.body.message = trimmedMessage
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+    .replace(/javascript:/gi, '')
+    .replace(/on\w+=/gi, '');
+
+  next();
+};
+
 module.exports = {
   validateInput,
   sanitizeInput,
   strictRateLimit,
   authRateLimit,
   securityLogger,
-  validateContentType
+  validateContentType,
+  validateChatInput
 };

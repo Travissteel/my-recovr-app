@@ -106,6 +106,13 @@ const contentCreationLimiter = createAccountLimiter(
   'Too much content created recently, please wait before posting again.'
 );
 
+// Chatbot-specific rate limiter (per user)
+const rateLimitChatbot = () => createAccountLimiter(
+  60 * 1000, // 1 minute window
+  20, // 20 messages per minute (more generous for AI chat)
+  'Too many chatbot messages, please slow down.'
+);
+
 // Progressive delay for failed authentication attempts
 const createProgressiveDelay = () => {
   const attempts = new Map();
@@ -160,5 +167,6 @@ module.exports = {
   passwordResetLimiter,
   messagingLimiter,
   contentCreationLimiter,
+  rateLimitChatbot,
   progressiveAuthDelay
 };
