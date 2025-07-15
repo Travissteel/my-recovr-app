@@ -5,7 +5,7 @@ const pool = require('../database/connection');
 class EmailVerification {
   constructor() {
     // Configure email transporter
-    this.transporter = nodemailer.createTransporter({
+    this.transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST || 'localhost',
       port: process.env.SMTP_PORT || 587,
       secure: process.env.SMTP_SECURE === 'true',

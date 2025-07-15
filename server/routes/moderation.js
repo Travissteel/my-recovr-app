@@ -234,7 +234,7 @@ router.get('/queue',
 });
 
 // Assign queue item to moderator
-router.post('/queue/:itemId/assign', authenticateToken, requireModeratorRole, async (req, res) => {
+router.post('/queue/:itemId/assign', authenticateToken, requireModerator, async (req, res) => {
   try {
     const { itemId } = req.params;
     const { assignToId } = req.body;
@@ -267,7 +267,7 @@ router.post('/queue/:itemId/assign', authenticateToken, requireModeratorRole, as
 });
 
 // Take moderation action
-router.post('/actions', authenticateToken, requireModeratorRole, async (req, res) => {
+router.post('/actions', authenticateToken, requireModerator, async (req, res) => {
   try {
     const {
       targetType,
@@ -422,7 +422,7 @@ router.post('/actions', authenticateToken, requireModeratorRole, async (req, res
 });
 
 // Get user moderation history
-router.get('/users/:userId/history', authenticateToken, requireModeratorRole, async (req, res) => {
+router.get('/users/:userId/history', authenticateToken, requireModerator, async (req, res) => {
   try {
     const { userId } = req.params;
     const { page = 1, limit = 20 } = req.query;
@@ -496,7 +496,7 @@ router.get('/users/:userId/history', authenticateToken, requireModeratorRole, as
 });
 
 // Get flagged content requiring review
-router.get('/flagged-content', authenticateToken, requireModeratorRole, async (req, res) => {
+router.get('/flagged-content', authenticateToken, requireModerator, async (req, res) => {
   try {
     const { contentType = 'message', page = 1, limit = 20 } = req.query;
 
@@ -537,7 +537,7 @@ router.get('/flagged-content', authenticateToken, requireModeratorRole, async (r
 });
 
 // Update flagged terms
-router.post('/flagged-terms', authenticateToken, requireModeratorRole, async (req, res) => {
+router.post('/flagged-terms', authenticateToken, requireModerator, async (req, res) => {
   try {
     const { term, category, severity, isRegex = false } = req.body;
 
@@ -572,7 +572,7 @@ router.post('/flagged-terms', authenticateToken, requireModeratorRole, async (re
 });
 
 // Get platform health metrics
-router.get('/platform-health', authenticateToken, requireModeratorRole, async (req, res) => {
+router.get('/platform-health', authenticateToken, requireModerator, async (req, res) => {
   try {
     const healthQuery = `
       SELECT 

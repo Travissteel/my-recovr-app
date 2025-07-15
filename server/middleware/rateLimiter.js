@@ -1,17 +1,24 @@
 const rateLimit = require('express-rate-limit');
-const RedisStore = require('rate-limit-redis');
-const Redis = require('redis');
 
-// Create Redis client for rate limiting (fallback to memory if Redis not available)
-let redisClient;
-try {
-  redisClient = Redis.createClient({
-    host: process.env.REDIS_HOST || 'localhost',
-    port: process.env.REDIS_PORT || 6379,
-    password: process.env.REDIS_PASSWORD
-  });
-} catch (error) {
-  console.warn('Redis not available for rate limiting, using memory store');
+// For development, use memory store. For production, configure Redis if needed
+let redisClient = null;
+
+if (process.env.NODE_ENV === 'production' && process.env.REDIS_HOST) {
+  try {
+    const Redis = require('redis');
+    const RedisStore = require('rate-limit-redis');
+    
+    redisClient = Redis.createClient({
+      host: process.env.REDIS_HOST,
+      port: process.env.REDIS_PORT || 6379,
+      password: process.env.REDIS_PASSWORD
+    });
+    console.log('✅ Redis connected for rate limiting');
+  } catch (error) {
+    console.warn('⚠️ Redis not available for rate limiting, using memory store:', error.message);
+  }
+} else {
+  console.log('📝 Using memory store for rate limiting (development mode)');
 }
 
 // General API rate limiter
@@ -24,9 +31,13 @@ const generalLimiter = rateLimit({
   },
   standardHeaders: true,
   legacyHeaders: false,
-  store: redisClient ? new RedisStore({
-    sendCommand: (...args) => redisClient.call(...args),
-  }) : undefined
+  // Use memory store for development, Redis for production
+  store: redisClient ? (() => {
+    const RedisStore = require('rate-limit-redis');
+    return new RedisStore({
+      sendCommand: (...args) => redisClient.call(...args),
+    });
+  })() : undefined
 });
 
 // Strict limiter for authentication endpoints
@@ -40,9 +51,13 @@ const authLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   skipSuccessfulRequests: true, // Don't count successful requests
-  store: redisClient ? new RedisStore({
-    sendCommand: (...args) => redisClient.call(...args),
-  }) : undefined
+  // Use memory store for development, Redis for production
+  store: redisClient ? (() => {
+    const RedisStore = require('rate-limit-redis');
+    return new RedisStore({
+      sendCommand: (...args) => redisClient.call(...args),
+    });
+  })() : undefined
 });
 
 // Very strict limiter for password reset
@@ -55,9 +70,13 @@ const passwordResetLimiter = rateLimit({
   },
   standardHeaders: true,
   legacyHeaders: false,
-  store: redisClient ? new RedisStore({
-    sendCommand: (...args) => redisClient.call(...args),
-  }) : undefined
+  // Use memory store for development, Redis for production
+  store: redisClient ? (() => {
+    const RedisStore = require('rate-limit-redis');
+    return new RedisStore({
+      sendCommand: (...args) => redisClient.call(...args),
+    });
+  })() : undefined
 });
 
 // Account-specific rate limiter (by user ID)

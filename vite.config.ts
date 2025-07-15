@@ -15,6 +15,7 @@ export default defineConfig({
     },
   },
   server: {
+    host: '0.0.0.0', // Allow access from Windows host
     port: 3000,
     proxy: {
       '/api': {
