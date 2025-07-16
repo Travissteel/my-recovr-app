@@ -73,7 +73,7 @@ export const LandingPage: React.FC = () => {
               <h3 className="text-xl font-semibold mb-4 text-green-600">✅ RecovR</h3>
               <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                 <li>• Multi-addiction support (10+ types)</li>
-                <li>• $24.99/year (65% savings vs competitors)</li>
+                <li>• $100/year (2 months free)</li>
                 <li>• Anonymous community features</li>
                 <li>• Built-in crisis intervention</li>
                 <li>• Professional integration</li>
@@ -122,7 +122,7 @@ export const LandingPage: React.FC = () => {
                 Most Popular
               </div>
               <h3 className="text-xl font-semibold mb-4">Premium</h3>
-              <div className="text-3xl font-bold mb-4">$24.99<span className="text-sm">/year</span></div>
+              <div className="text-3xl font-bold mb-4">$100<span className="text-sm">/year</span></div>
               <ul className="text-left space-y-2 mb-6">
                 <li>• All features included</li>
                 <li>• Unlimited community access</li>
@@ -137,7 +137,7 @@ export const LandingPage: React.FC = () => {
             
             <Card className="p-6">
               <h3 className="text-xl font-semibold mb-4">Lifetime</h3>
-              <div className="text-3xl font-bold mb-4">$79.99<span className="text-sm"> once</span></div>
+              <div className="text-3xl font-bold mb-4">$150<span className="text-sm"> once</span></div>
               <ul className="text-left space-y-2 mb-6">
                 <li>• Everything in Premium</li>
                 <li>• Lifetime access</li>

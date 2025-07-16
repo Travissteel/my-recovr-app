@@ -8,7 +8,7 @@ const router = express.Router();
 
 /**
  * Extended 365-Day Gamification System
- * Building upon QUITTR's 90-day reboot with a full year journey
+ * Building upon proven 90-day reboot programs with a full year journey
  */
 
 // Enhanced Achievement System with 365-Day Program
@@ -81,7 +81,7 @@ const EXTENDED_ACHIEVEMENTS = {
   },
   'ninety_days': {
     name: 'Reboot Complete',
-    description: '90 days - QUITTR-style reboot achieved! Brain fully rewired!',
+    description: '90 days - Complete brain reboot achieved! Brain fully rewired!',
     icon: '🎯',
     points: 500,
     category: 'milestone',

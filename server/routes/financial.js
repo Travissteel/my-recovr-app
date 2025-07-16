@@ -7,7 +7,7 @@ const router = express.Router();
 
 /**
  * Financial Motivation Routes
- * QUITTR-inspired money tracking and financial motivation system
+ * Money tracking and financial motivation system for recovery support
  */
 
 // Get comprehensive financial overview

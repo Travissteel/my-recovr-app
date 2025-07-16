@@ -117,7 +117,7 @@ const ChatbotPage: React.FC = () => {
         {/* Comparison with Competitors */}
         <div className="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-soft mb-8">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
-            More Advanced Than Quittr's AI
+            Advanced AI-Powered Recovery Support
           </h2>
           
           <div className="overflow-x-auto">
@@ -126,7 +126,7 @@ const ChatbotPage: React.FC = () => {
                 <tr className="border-b border-gray-200 dark:border-gray-700">
                   <th className="text-left py-3 px-4 text-gray-900 dark:text-white">Feature</th>
                   <th className="text-center py-3 px-4 text-primary-600">RecovR AI</th>
-                  <th className="text-center py-3 px-4 text-gray-500">Quittr</th>
+                  <th className="text-center py-3 px-4 text-gray-500">Standard Apps</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 dark:divide-gray-700">

@@ -7,7 +7,7 @@ const router = express.Router();
 
 /**
  * Notification System Routes
- * QUITTR-inspired customizable motivational notifications and reminders
+ * Customizable motivational notifications and reminders for recovery support
  */
 
 // Get user's notification preferences

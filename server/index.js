@@ -46,8 +46,11 @@ const calendarRoutes = require('./routes/calendar');
 const financialRoutes = require('./routes/financial');
 const notificationSystemRoutes = require('./routes/notificationSystem');
 const chatbotRoutes = require('./routes/chatbot');
+const subscriptionRoutes = require('./routes/subscriptions');
+const webhookRoutes = require('./routes/webhooks');
 
 const { authenticateSocket } = require('./middleware/auth');
+const { performanceMiddleware, cacheMiddleware } = require('./middleware/performance');
 
 const app = express();
 const server = createServer(app);
@@ -84,7 +87,14 @@ app.use(contentSecurityPolicy);
 // 7. Enhanced CORS with origin validation
 app.use(corsMiddleware);
 
-// 8. Helmet for additional security headers (complementing our custom ones)
+// 8. Performance optimizations
+app.use(performanceMiddleware.compression);
+app.use(performanceMiddleware.requestTiming);
+app.use(performanceMiddleware.memoryMonitor);
+app.use(performanceMiddleware.optimizeQuery);
+app.use(performanceMiddleware.optimizePagination);
+
+// 9. Helmet for additional security headers (complementing our custom ones)
 app.use(helmet({
   // Disable helmet's CSP since we have our own enhanced version
   contentSecurityPolicy: false,
@@ -132,7 +142,7 @@ app.use('/api', apiRoutes); // API management routes (version info, health, etc.
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/programs', programRoutes);
-app.use('/api/community', communityRoutes);
+app.use('/api/community', cacheMiddleware.community, communityRoutes);
 app.use('/api/crisis', crisisRoutes);
 app.use('/api/crisis-support', crisisSupportRoutes);
 app.use('/api/messaging', messagingRoutes);
@@ -140,14 +150,16 @@ app.use('/api/moderation', moderationRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/blocker', blockerRoutes);
 app.use('/api/extension', extensionRoutes);
-app.use('/api/gamification', gamificationRoutes);
-app.use('/api/extended-gamification', extendedGamificationRoutes);
+app.use('/api/gamification', cacheMiddleware.static, gamificationRoutes);
+app.use('/api/extended-gamification', cacheMiddleware.static, extendedGamificationRoutes);
 app.use('/api/mentor-program', mentorProgramRoutes);
-app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/dashboard', cacheMiddleware.dashboard, dashboardRoutes);
 app.use('/api/calendar', calendarRoutes);
 app.use('/api/financial', financialRoutes);
 app.use('/api/notification-system', notificationSystemRoutes);
 app.use('/api/chatbot', chatbotRoutes);
+app.use('/api/subscriptions', cacheMiddleware.subscriptions, subscriptionRoutes);
+app.use('/api/webhooks', webhookRoutes);
 
 // Socket.io for real-time features
 io.use(authenticateSocket);

@@ -27,6 +27,8 @@ import { SettingsPage } from './pages/SettingsPage'
 import { PremiumPage } from './pages/PremiumPage'
 import { NotFoundPage } from './pages/NotFoundPage'
 import ChatbotPage from './pages/ChatbotPage'
+import SubscriptionPage from './pages/SubscriptionPage'
+import EmailVerificationPage from './pages/EmailVerificationPage'
 
 function App() {
   return (
@@ -42,6 +44,10 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/premium" element={<PremiumPage />} />
+                <Route path="/verify-email" element={<EmailVerificationPage />} />
+                <Route path="/subscription" element={<SubscriptionPage />} />
+                <Route path="/subscription/success" element={<SubscriptionPage />} />
+                <Route path="/subscription/cancel" element={<SubscriptionPage />} />
                 
                 {/* Protected Routes */}
                 <Route path="/onboarding" element={

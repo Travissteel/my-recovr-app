@@ -1,6 +1,7 @@
 const express = require('express');
 const pool = require('../database/connection');
 const { authenticateToken, optionalAuth, requireRole } = require('../middleware/auth');
+const { requirePremium, checkLimit, getCurrentUsage } = require('../middleware/premiumFeatures');
 
 const router = express.Router();
 
@@ -54,7 +55,7 @@ router.get('/groups', optionalAuth, async (req, res) => {
   }
 });
 
-// Create a new community group
+// Create a new community group (Premium feature for creating private groups)
 router.post('/groups', authenticateToken, async (req, res) => {
   try {
     const {
@@ -69,6 +70,31 @@ router.post('/groups', authenticateToken, async (req, res) => {
       return res.status(400).json({
         error: 'Group name and description are required'
       });
+    }
+
+    // Check if user is trying to create a private group (premium feature)
+    if (isPublic === false) {
+      // Check if user has premium access
+      const userQuery = `
+        SELECT subscription_plan, subscription_status, lifetime_access, trial_ends_at
+        FROM users WHERE id = $1
+      `;
+      const userResult = await pool.query(userQuery, [req.user.id]);
+      const user = userResult.rows[0];
+      
+      const premiumPlans = ['premium_monthly', 'premium_yearly', 'lifetime'];
+      const isInTrial = user.trial_ends_at && new Date() < new Date(user.trial_ends_at);
+      const hasPremium = premiumPlans.includes(user.subscription_plan) && 
+                        (user.subscription_status === 'active' || user.lifetime_access);
+      
+      if (!hasPremium && !isInTrial) {
+        return res.status(403).json({
+          error: 'Premium subscription required to create private groups',
+          subscription_required: true,
+          current_plan: user.subscription_plan,
+          upgrade_url: '/subscription'
+        });
+      }
     }
 
     const client = await pool.connect();

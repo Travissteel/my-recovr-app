@@ -1,5 +1,5 @@
 -- Gamification Content Seeder
--- Inspired by QUITTR's motivational and challenge system
+-- Motivational and challenge system for recovery support
 
 -- Insert sample daily challenges
 INSERT INTO daily_challenges (title, description, challenge_type, difficulty_level, points_reward, instructions) VALUES
@@ -39,8 +39,8 @@ INSERT INTO motivational_content (content_type, title, content, author, category
 ('quote', 'Progress Over Perfection', 'Progress, not perfection. Every step forward matters, no matter how small.', 'Recovery Wisdom', 'recovery', '[]'),
 ('quote', 'Inner Strength', 'You are braver than you believe, stronger than you seem, and smarter than you think.', 'A.A. Milne', 'self_worth', '[]'),
 
--- Porn addiction specific quotes (like QUITTR)
-('quote', 'Breaking Free', 'Every urge you resist makes you stronger. Your brain is rewiring itself with each moment of resistance.', 'QUITTR Wisdom', 'recovery', '["pornography", "sex_addiction"]'),
+-- Porn addiction specific quotes for recovery support
+('quote', 'Breaking Free', 'Every urge you resist makes you stronger. Your brain is rewiring itself with each moment of resistance.', 'Recovery Wisdom', 'recovery', '["pornography", "sex_addiction"]'),
 ('quote', 'Real Connections', 'True intimacy comes from real human connection, not from screens. You''re choosing the real over the artificial.', 'Recovery Expert', 'relationships', '["pornography", "sex_addiction"]'),
 ('quote', 'Neuroplasticity', 'Your brain has an amazing ability to heal and rewire. Every day clean is literally changing your neural pathways.', 'Neuroscience', 'brain_health', '["pornography", "sex_addiction"]'),
 
@@ -65,7 +65,7 @@ INSERT INTO motivational_content (content_type, title, content, author, category
 ('affirmation', 'Self-Compassion', 'I treat myself with kindness and understanding. Recovery is a journey, and I am patient with myself.', 'Recovery Affirmation', 'self_care', '[]'),
 ('affirmation', 'Inner Peace', 'I am finding peace within myself. Each day of recovery brings me closer to the person I want to become.', 'Recovery Affirmation', 'inner_peace', '[]');
 
--- Insert sample addiction types with icons and colors (QUITTR-style visual design)
+-- Insert sample addiction types with icons and colors for visual design
 INSERT INTO addiction_types (name, description, icon, color) VALUES
 ('Pornography', 'Overcome pornography addiction and reclaim healthy sexuality', '🔒', '#E53E3E'),
 ('Social Media', 'Break free from compulsive social media use and digital overwhelm', '📱', '#3182CE'),

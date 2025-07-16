@@ -2,6 +2,7 @@ const express = require('express');
 const pool = require('../database/connection');
 const { authenticateToken } = require('../middleware/auth');
 const { Authorization } = require('../middleware/authorization');
+const { checkLimit, getCurrentUsage } = require('../middleware/premiumFeatures');
 const SecurityAudit = require('../utils/securityAudit');
 const DataFilter = require('../utils/dataFilter');
 
@@ -224,8 +225,11 @@ router.get('/conversations', authenticateToken, async (req, res) => {
   }
 });
 
-// Send a message
-router.post('/conversations/:conversationId/messages', authenticateToken, async (req, res) => {
+// Send a message (with daily limits for free users)
+router.post('/conversations/:conversationId/messages', 
+  authenticateToken, 
+  checkLimit('max_messages_per_day', getCurrentUsage.max_messages_per_day),
+  async (req, res) => {
   try {
     const { conversationId } = req.params;
     const { content, messageType = 'text', parentMessageId } = req.body;

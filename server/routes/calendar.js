@@ -7,7 +7,7 @@ const router = express.Router();
 
 /**
  * Interactive Calendar Routes
- * QUITTR-inspired calendar with mood tracking, trigger logging, and visual progress
+ * Interactive calendar with mood tracking, trigger logging, and visual progress
  */
 
 // Get calendar data for a specific month

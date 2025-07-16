@@ -37,7 +37,7 @@ function ComponentTest() {
             🌟 RecovR Enhanced Components Test
           </h1>
           <p className="text-xl text-gray-600 mb-2">
-            Testing the improved features that compete with Quittr
+            Testing the improved features for comprehensive recovery support
           </p>
           <p className="text-sm text-gray-500">
             Life Tree • Streak Tracking • Daily Tasks • Crisis Support
@@ -104,7 +104,7 @@ function ComponentTest() {
         {/* Feature Comparison */}
         <div className="bg-white rounded-xl p-8 shadow-lg border border-gray-200">
           <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
-            🎯 RecovR vs Quittr Feature Comparison
+            🎯 RecovR Feature Advantages
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>

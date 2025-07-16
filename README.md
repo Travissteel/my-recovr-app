@@ -7,7 +7,7 @@ RecovR is a comprehensive recovery platform designed to support individuals in o
 ### Core Recovery Features
 - **Multi-Addiction Support**: Track recovery from 10+ addiction types
 - **90-Day Structured Program**: Evidence-based recovery phases
-- **Life Tree Visualization**: Interactive progress tracking inspired by successful apps like Quittr
+- **Life Tree Visualization**: Interactive progress tracking with visual growth metrics
 - **Real-Time Progress Dashboard**: Comprehensive analytics and insights
 - **Daily Check-ins**: Mood, cravings, stress, and wellness tracking
 - **Streak Counters**: Motivational progress tracking with animations
@@ -26,7 +26,7 @@ RecovR is a comprehensive recovery platform designed to support individuals in o
 
 ## 💰 Competitive Pricing
 
-**More Affordable Than Quittr** (which charges $19.99-$49.99/year):
+**Affordable Recovery Platform** with competitive pricing:
 
 ### Free Tier
 - Basic recovery tracking
@@ -35,9 +35,9 @@ RecovR is a comprehensive recovery platform designed to support individuals in o
 - Basic blocking tools
 
 ### Premium Tier - **Best Value**
-- **Monthly**: $6.99/month (vs Quittr's $9.99-$14.99)
-- **Yearly**: $24.99/year (vs Quittr's $19.99-$49.99) - **65% savings**
-- **Lifetime**: $79.99 (limited time - vs our original $150)
+- **Monthly**: $9.99/month - Great value for comprehensive features
+- **Yearly**: $100/year - **2 months free** (16% savings over monthly)
+- **Lifetime**: $150 (Early Adopter limited time offer)
 
 ### Features Included in Premium
 - Advanced analytics and insights
@@ -133,14 +133,14 @@ NODE_ENV=development
 FRONTEND_URL=http://localhost:3000
 ```
 
-## 🎯 Key Differentiators vs Quittr
+## 🎯 Key Platform Features
 
-1. **Multi-Addiction Support**: Unlike Quittr's single-focus approach, RecovR supports 10+ addiction types
-2. **Better Pricing**: 65% more affordable than Quittr with more features
-3. **Community Features**: Advanced anonymous community support
-4. **Crisis Intervention**: Built-in emergency support system
-5. **Comprehensive Analytics**: Detailed progress tracking and insights
-6. **Professional Integration**: Connect with therapists and counselors
+1. **Multi-Addiction Support**: Comprehensive support for 10+ addiction types in one platform
+2. **Affordable Pricing**: Premium features at competitive rates with exceptional value
+3. **Community Features**: Advanced anonymous community support and peer connections
+4. **Crisis Intervention**: Built-in emergency support system with 24/7 resources
+5. **Comprehensive Analytics**: Detailed progress tracking and personalized insights
+6. **Professional Integration**: Connect with therapists and counselors seamlessly
 
 ## 🔒 Security & Privacy
 

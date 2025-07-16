@@ -11,7 +11,7 @@ describe('LandingPage', () => {
   it('renders the main heading', () => {
     renderWithRouter(<LandingPage />);
     
-    expect(screen.getByRole('heading', { name: /recovr/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /^recovr$/i, level: 1 })).toBeInTheDocument();
   });
 
   it('displays the call-to-action buttons', () => {
@@ -24,16 +24,16 @@ describe('LandingPage', () => {
   it('shows feature cards', () => {
     renderWithRouter(<LandingPage />);
     
-    expect(screen.getByText(/multi-addiction support/i)).toBeInTheDocument();
-    expect(screen.getByText(/community support/i)).toBeInTheDocument();
-    expect(screen.getByText(/crisis intervention/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /multi-addiction support/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /community support/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /crisis intervention/i })).toBeInTheDocument();
   });
 
   it('displays pricing information', () => {
     renderWithRouter(<LandingPage />);
     
     expect(screen.getByText(/affordable recovery support/i)).toBeInTheDocument();
-    expect(screen.getByText('$24.99')).toBeInTheDocument();
-    expect(screen.getByText('$79.99')).toBeInTheDocument();
+    expect(screen.getByText('$100')).toBeInTheDocument();
+    expect(screen.getByText('$150')).toBeInTheDocument();
   });
 });

@@ -61,8 +61,104 @@ CREATE TABLE users (
     level INTEGER DEFAULT 1,
     experience_points INTEGER DEFAULT 0,
     total_money_saved DECIMAL(10,2) DEFAULT 0.00,
-    recovery_score INTEGER DEFAULT 0
+    recovery_score INTEGER DEFAULT 0,
+    -- Subscription fields
+    subscription_plan VARCHAR(20) DEFAULT 'free' CHECK (subscription_plan IN ('free', 'premium_monthly', 'premium_yearly', 'lifetime', 'professional')),
+    subscription_status VARCHAR(20) DEFAULT 'active' CHECK (subscription_status IN ('active', 'canceled', 'past_due', 'incomplete', 'trialing')),
+    stripe_customer_id VARCHAR(255),
+    subscription_ends_at TIMESTAMP NULL,
+    trial_ends_at TIMESTAMP NULL,
+    lifetime_access BOOLEAN DEFAULT false
 );
+
+-- Subscriptions table
+CREATE TABLE subscriptions (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    stripe_subscription_id VARCHAR(255) UNIQUE,
+    stripe_customer_id VARCHAR(255) NOT NULL,
+    stripe_price_id VARCHAR(255) NOT NULL,
+    plan_type VARCHAR(20) NOT NULL CHECK (plan_type IN ('premium_monthly', 'premium_yearly', 'lifetime', 'professional')),
+    status VARCHAR(20) NOT NULL CHECK (status IN ('active', 'canceled', 'past_due', 'incomplete', 'trialing', 'unpaid')),
+    current_period_start TIMESTAMP NOT NULL,
+    current_period_end TIMESTAMP NOT NULL,
+    trial_start TIMESTAMP NULL,
+    trial_end TIMESTAMP NULL,
+    canceled_at TIMESTAMP NULL,
+    cancel_at_period_end BOOLEAN DEFAULT false,
+    metadata JSONB DEFAULT '{}',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Payment history table
+CREATE TABLE payment_history (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    subscription_id UUID REFERENCES subscriptions(id) ON DELETE SET NULL,
+    stripe_payment_intent_id VARCHAR(255),
+    stripe_invoice_id VARCHAR(255),
+    amount INTEGER NOT NULL, -- Amount in cents
+    currency VARCHAR(3) DEFAULT 'USD',
+    payment_method VARCHAR(50),
+    status VARCHAR(20) NOT NULL CHECK (status IN ('succeeded', 'failed', 'pending', 'canceled', 'refunded')),
+    description TEXT,
+    metadata JSONB DEFAULT '{}',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Referrals table for referral program
+CREATE TABLE referrals (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    referrer_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    referred_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    referral_code VARCHAR(50) NOT NULL,
+    status VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending', 'active', 'completed', 'expired')),
+    reward_type VARCHAR(20) DEFAULT 'premium_month' CHECK (reward_type IN ('premium_month', 'discount', 'lifetime_discount')),
+    reward_amount INTEGER DEFAULT 0, -- Amount in cents or percentage
+    reward_granted BOOLEAN DEFAULT false,
+    referred_user_active_days INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    completed_at TIMESTAMP NULL,
+    UNIQUE(referrer_id, referred_id)
+);
+
+-- User referral codes table
+CREATE TABLE user_referral_codes (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    code VARCHAR(50) NOT NULL UNIQUE,
+    is_active BOOLEAN DEFAULT true,
+    use_count INTEGER DEFAULT 0,
+    max_uses INTEGER DEFAULT 100,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    expires_at TIMESTAMP NULL
+);
+
+-- Indexes for performance
+CREATE INDEX idx_subscriptions_user_id ON subscriptions(user_id);
+CREATE INDEX idx_subscriptions_stripe_subscription_id ON subscriptions(stripe_subscription_id);
+CREATE INDEX idx_payment_history_user_id ON payment_history(user_id);
+CREATE INDEX idx_payment_history_subscription_id ON payment_history(subscription_id);
+CREATE INDEX idx_referrals_referrer_id ON referrals(referrer_id);
+CREATE INDEX idx_referrals_referred_id ON referrals(referred_id);
+CREATE INDEX idx_user_referral_codes_user_id ON user_referral_codes(user_id);
+CREATE INDEX idx_user_referral_codes_code ON user_referral_codes(code);
+
+-- Email verification tokens table
+CREATE TABLE email_verification_tokens (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    token VARCHAR(255) NOT NULL UNIQUE,
+    expires_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(user_id) -- Only one active token per user
+);
+
+-- Index for email verification tokens
+CREATE INDEX idx_email_verification_tokens_user_id ON email_verification_tokens(user_id);
+CREATE INDEX idx_email_verification_tokens_token ON email_verification_tokens(token);
+CREATE INDEX idx_email_verification_tokens_expires_at ON email_verification_tokens(expires_at);
 
 -- Addiction types table
 CREATE TABLE addiction_types (
@@ -543,7 +639,7 @@ CREATE TABLE motivational_content (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- User's journal entries (like QUITTR's reflection system)
+-- User's journal entries for reflection and recovery tracking
 CREATE TABLE journal_entries (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
@@ -561,7 +657,7 @@ CREATE TABLE journal_entries (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Money saved tracking (financial motivation like QUITTR)
+-- Money saved tracking for financial motivation
 CREATE TABLE money_saved_log (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
@@ -588,7 +684,7 @@ CREATE TABLE health_improvements (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- User level progression (like QUITTR's progression system)
+-- User level progression for gamified recovery tracking
 CREATE TABLE user_level_history (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,

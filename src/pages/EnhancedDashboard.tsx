@@ -122,7 +122,7 @@ const EnhancedDashboard: React.FC = () => {
               Welcome back, {user?.firstName}! 🌟
             </h1>
             <p className="text-gray-600 dark:text-gray-400 mt-2">
-              Your comprehensive recovery dashboard with QUITTR-inspired features
+              Your comprehensive recovery dashboard with advanced tracking features
             </p>
           </div>
           {dashboardData && (

@@ -7,10 +7,10 @@ const router = express.Router();
 
 /**
  * Enhanced Dashboard Routes
- * Inspired by QUITTR's engaging and motivational dashboard design
+ * Engaging and motivational dashboard design for recovery tracking
  */
 
-// Get comprehensive dashboard data (main dashboard like QUITTR)
+// Get comprehensive dashboard data for recovery tracking
 router.get('/', authenticateToken, async (req, res) => {
   try {
     // Get user's active recovery programs with detailed stats
@@ -223,7 +223,7 @@ router.get('/', authenticateToken, async (req, res) => {
   }
 });
 
-// Get detailed weekly report (like QUITTR's progress reports)
+// Get detailed weekly report for progress tracking
 router.get('/weekly-report', authenticateToken, async (req, res) => {
   try {
     const { week_offset = 0 } = req.query;

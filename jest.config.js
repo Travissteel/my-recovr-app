@@ -1,14 +1,19 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
   globals: {
     'ts-jest': {
       tsconfig: {
         jsx: 'react-jsx'
       }
+    },
+    'import.meta': {
+      env: {
+        VITE_API_URL: 'http://localhost:5000/api'
+      }
     }
   },
-  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy'

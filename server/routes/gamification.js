@@ -8,12 +8,12 @@ const router = express.Router();
 
 /**
  * Gamification and Progress Tracking Routes
- * Inspired by QUITTR's proven psychology-based approach to addiction recovery
+ * Inspired by proven psychology-based approaches to addiction recovery
  */
 
-// Achievement system inspired by QUITTR's milestone approach
+// Achievement system inspired by proven milestone approaches
 const ACHIEVEMENTS = {
-  // Time-based milestones (like QUITTR's streak tracking)
+  // Time-based milestones for effective streak tracking
   'first_day': {
     name: 'First Day Strong',
     description: 'Completed your first day of recovery',
@@ -44,7 +44,7 @@ const ACHIEVEMENTS = {
   },
   'ninety_days': {
     name: 'Reboot Complete',
-    description: '90 days - QUITTR-style reboot achieved!',
+    description: '90 days - Complete brain reboot achieved!',
     icon: '🎯',
     points: 500,
     category: 'milestone'
@@ -64,7 +64,7 @@ const ACHIEVEMENTS = {
     category: 'milestone'
   },
 
-  // Engagement achievements (inspired by QUITTR's daily exercises)
+  // Engagement achievements for consistent daily practice
   'daily_checkin_streak_7': {
     name: 'Check-in Champion',
     description: 'Completed daily check-ins for 7 days straight',
@@ -94,7 +94,7 @@ const ACHIEVEMENTS = {
     category: 'resilience'
   },
 
-  // Health and wellness (like QUITTR's health improvement tracking)
+  // Health and wellness tracking for comprehensive recovery
   'health_improvements': {
     name: 'Wellness Warrior',
     description: 'Documented health improvements in 3 categories',
@@ -118,7 +118,7 @@ const ACHIEVEMENTS = {
   }
 };
 
-// Health benefits timeline (inspired by QUITTR's science-based approach)
+// Health benefits timeline based on scientific research
 const HEALTH_BENEFITS = {
   '1_day': {
     title: 'Day 1: The Journey Begins',
@@ -454,7 +454,7 @@ router.post('/check-achievements', authenticateToken, async (req, res) => {
   }
 });
 
-// Get leaderboard (community feature inspired by QUITTR)
+// Get leaderboard for community motivation
 router.get('/leaderboard', authenticateToken, async (req, res) => {
   try {
     const { timeframe = 'all_time', type = 'points' } = req.query;
